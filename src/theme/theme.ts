@@ -24,5 +24,12 @@ export const theme = extendTheme({
         LinkComponent: LinkBehavior,
       },
     },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontSize: '0.75rem',
+        },
+      },
+    },
   },
 });

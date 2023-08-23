@@ -7,7 +7,7 @@ import JokePage from './pages/JokePage';
 
 function App() {
   return (
-    <CssVarsProvider theme={theme}>
+    <CssVarsProvider theme={theme} defaultMode="dark">
       <CssBaseline enableColorScheme />
       <Routes>
         <Route>
