@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { DarkMode, LightMode, LunchDining } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
@@ -64,15 +63,6 @@ const Header = () => {
     <Box sx={{ width: '100%' }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: { xs: 0, md: 2 } }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Box sx={{ flexGrow: 1 }}>
             <IconButton color="inherit" aria-label="logo" sx={{ mr: 2 }}>
               <LunchDining />
