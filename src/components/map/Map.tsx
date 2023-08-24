@@ -2,6 +2,7 @@ import GoogleMapReact, { ChangeEventValue } from 'google-map-react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getCurrentPosition, setBounds, setCurrentPosition } from '../../features/map/mapSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { CircularProgress } from '@mui/material';
 
 const Map = ({ mode }: { mode: string }) => {
   const dispatch = useAppDispatch();
@@ -13,19 +14,25 @@ const Map = ({ mode }: { mode: string }) => {
   };
 
   return (
-    <GoogleMapReact
-      bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_API_KEY }}
-      center={coordinates}
-      defaultZoom={16}
-      options={{
-        mapId:
-          mode === 'dark'
-            ? import.meta.env.VITE_DARK_THEME_MAP_ID
-            : import.meta.env.VITE_LIGHT_THEME_MAP_ID,
-        styles: undefined,
-      }}
-      onChange={handleCoordinatesChange}
-    ></GoogleMapReact>
+    <>
+      {coordinates.lat !== 0 && coordinates.lng !== 0 ? (
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_API_KEY }}
+          center={coordinates}
+          defaultZoom={16}
+          options={{
+            mapId:
+              mode === 'dark'
+                ? import.meta.env.VITE_DARK_THEME_MAP_ID
+                : import.meta.env.VITE_LIGHT_THEME_MAP_ID,
+            styles: undefined,
+          }}
+          onChange={handleCoordinatesChange}
+        ></GoogleMapReact>
+      ) : (
+        <CircularProgress />
+      )}
+    </>
   );
 };
 

@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
-type PositionType = {
+export type PositionType = {
   lat: number;
   lng: number;
 };
 
-type BoundsType = {
+export type BoundsType = {
   ne: PositionType;
   sw: PositionType;
 };
@@ -37,5 +37,6 @@ export const mapSlice = createSlice({
 export const { setCurrentPosition, setBounds } = mapSlice.actions;
 
 export const getCurrentPosition = (state: RootState) => state.map.currentPosition;
+export const getBounds = (state: RootState) => state.map.bounds;
 
 export default mapSlice.reducer;
