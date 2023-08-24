@@ -45,13 +45,14 @@ export type RestaurantsResponseDataType = {
   latitude?: string;
   longitude?: string;
   num_reviews?: string;
-  location_string?: string;
-  photo?: string;
+  address?: string;
+  photo?: any;
   ranking?: string;
   rating?: string;
   is_closed?: boolean;
   price_level?: string;
   web_url?: string;
+  phone?: string;
   [key: string]: unknown;
 };
 
@@ -61,11 +62,12 @@ export type RestaurantsDataType = {
   latitude: string;
   longitude: string;
   num_reviews?: string;
-  location_string?: string;
+  address?: string;
   photo?: string;
   ranking?: string;
   rating?: string;
   is_closed?: boolean;
   price_level?: string;
   web_url?: string;
+  phone?: string;
 };

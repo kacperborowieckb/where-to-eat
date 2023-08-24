@@ -3,14 +3,28 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { getCurrentPosition, setBounds, setCurrentPosition } from '../../features/map/mapSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { CircularProgress } from '@mui/material';
+import { RestaurantsDataType } from '../../features/api/apiSlice';
+import { useState } from 'react';
 
-const Map = ({ mode }: { mode: string }) => {
+type MapProps = {
+  mode: string;
+  restaurants: RestaurantsDataType[];
+};
+
+const Map = ({ mode, restaurants = [] }: MapProps) => {
   const dispatch = useAppDispatch();
   const coordinates = useAppSelector(getCurrentPosition);
+  const [canChangeCoordinates, setCanChangeCoordinates] = useState(true);
 
   const handleCoordinatesChange = (e: ChangeEventValue) => {
-    dispatch(setCurrentPosition({ lat: e.center.lat, lng: e.center.lng }));
-    dispatch(setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw }));
+    if (canChangeCoordinates) {
+      dispatch(setCurrentPosition({ lat: e.center.lat, lng: e.center.lng }));
+      dispatch(setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw }));
+      setCanChangeCoordinates(false);
+      setTimeout(() => {
+        setCanChangeCoordinates(true);
+      }, 5000);
+    }
   };
 
   return (

@@ -13,13 +13,14 @@ export const transformRestaurantsData = (
         latitude: restaurant.latitude,
         longitude: restaurant.longitude,
         num_reviews: restaurant.num_reviews,
-        location_string: restaurant.location_string,
-        photo: restaurant.photo,
+        addres: restaurant.address,
+        photo: restaurant?.photo?.images?.large?.url,
         ranking: restaurant.ranking,
         rating: restaurant.rating,
         is_closed: restaurant.is_closed,
         price_level: restaurant.price_level,
         web_url: restaurant.web_url,
+        phone: restaurant.phone,
       });
     }
   }
