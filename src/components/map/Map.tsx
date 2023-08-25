@@ -35,6 +35,7 @@ const Map = ({ mode, restaurants }: MapProps) => {
           bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_API_KEY }}
           center={coordinates}
           defaultZoom={16}
+          key={restaurants.length}
           options={{
             mapId:
               mode === 'dark'

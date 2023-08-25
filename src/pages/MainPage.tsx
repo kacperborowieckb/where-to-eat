@@ -12,7 +12,7 @@ const MainPage = () => {
   const { mode } = useColorScheme();
   const bounds = useAppSelector(getBounds);
 
-  const { data = [], error, isLoading } = useGetRestaurantsDataQuery(bounds);
+  const { data = [], error, isLoading, status } = useGetRestaurantsDataQuery(bounds);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
@@ -24,7 +24,7 @@ const MainPage = () => {
 
   return (
     <Grid container spacing={2} sx={{ flex: 1, overflow: 'hidden' }}>
-      {isLoading ? (
+      {isLoading || status === 'pending' ? (
         <Grid
           item
           xs={4}
