@@ -49,7 +49,7 @@ const MainPage = () => {
           maxHeight: '100%',
         }}
       >
-        <Map mode={mode!} key={mode} restaurants={data} />
+        <Map mode={mode!} key={status + mode} restaurants={data} />
       </Grid>
     </Grid>
   );
