@@ -16,9 +16,11 @@ const Map = ({ mode, restaurants }: MapProps) => {
   const dispatch = useAppDispatch();
   const coordinates = useAppSelector(getCurrentPosition);
   const [canChangeCoordinates, setCanChangeCoordinates] = useState(true);
+  const [mapZoom, setMapZoom] = useState(16);
 
   const handleCoordinatesChange = (e: ChangeEventValue) => {
     dispatch(setCurrentPosition({ lat: e.center.lat, lng: e.center.lng }));
+    setMapZoom(e.zoom);
     if (canChangeCoordinates) {
       dispatch(setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw }));
       setCanChangeCoordinates(false);
@@ -35,6 +37,7 @@ const Map = ({ mode, restaurants }: MapProps) => {
           bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_API_KEY }}
           center={coordinates}
           defaultZoom={16}
+          zoom={mapZoom}
           key={Number(coordinates.lat) + Number(coordinates.lng)}
           options={{
             mapId:

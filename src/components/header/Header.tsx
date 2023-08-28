@@ -7,6 +7,9 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { DarkMode, LightMode, LunchDining } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
+import { usePlacesWidget } from 'react-google-autocomplete';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { setCurrentPosition } from '../../features/map/mapSlice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,6 +54,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Header = () => {
   const { mode, setMode } = useColorScheme();
+  const dispatch = useAppDispatch();
+
+  const { ref } = usePlacesWidget({
+    apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+    onPlaceSelected: (place) => {
+      if (place?.geometry?.location?.lat?.() && place?.geometry?.location?.lng?.()) {
+        console.log('dsds');
+        console.log(place);
+        console.log(place.geometry.location.lat());
+        dispatch(
+          setCurrentPosition({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+          })
+        );
+      }
+    },
+  });
 
   const handleSchemeChange = () => {
     if (mode === 'dark') {
@@ -82,6 +103,7 @@ const Header = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              inputRef={ref}
               sx={{ width: '100%' }}
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
