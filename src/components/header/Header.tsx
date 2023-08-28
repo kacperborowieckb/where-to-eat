@@ -81,7 +81,7 @@ const Header = () => {
     }
   };
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', zIndex: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>

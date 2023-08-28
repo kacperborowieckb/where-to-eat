@@ -1,6 +1,11 @@
 import GoogleMapReact, { ChangeEventValue } from 'google-map-react';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getCurrentPosition, setBounds, setCurrentPosition } from '../../features/map/mapSlice';
+import {
+  getCurrentPosition,
+  getSelectedRestaurant,
+  setBounds,
+  setCurrentPosition,
+} from '../../features/map/mapSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { CircularProgress } from '@mui/material';
 import { RestaurantsDataType } from '../../features/api/apiSlice';
@@ -17,6 +22,7 @@ const Map = ({ mode, restaurants }: MapProps) => {
   const coordinates = useAppSelector(getCurrentPosition);
   const [canChangeCoordinates, setCanChangeCoordinates] = useState(true);
   const [mapZoom, setMapZoom] = useState(16);
+  const selectedRestaurant = useAppSelector(getSelectedRestaurant);
 
   const handleCoordinatesChange = (e: ChangeEventValue) => {
     dispatch(setCurrentPosition({ lat: e.center.lat, lng: e.center.lng }));
@@ -38,8 +44,9 @@ const Map = ({ mode, restaurants }: MapProps) => {
           center={coordinates}
           defaultZoom={16}
           zoom={mapZoom}
-          key={Number(coordinates.lat) + Number(coordinates.lng)}
+          key={Number(coordinates.lat) + Number(coordinates.lng) + selectedRestaurant!}
           options={{
+            disableDefaultUI: true,
             mapId:
               mode === 'dark'
                 ? import.meta.env.VITE_DARK_THEME_MAP_ID
@@ -54,6 +61,7 @@ const Map = ({ mode, restaurants }: MapProps) => {
               lat={Number(restaurant.latitude)}
               lng={Number(restaurant.longitude)}
               key={restaurant.location_id}
+              isSelectedRestaurant={selectedRestaurant === Number(restaurant.location_id)}
             />
           ))}
         </GoogleMapReact>

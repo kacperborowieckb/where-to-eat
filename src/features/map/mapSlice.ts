@@ -14,11 +14,13 @@ export type BoundsType = {
 type MapState = {
   currentPosition: PositionType;
   bounds: BoundsType;
+  selectedRestaurant: number | undefined;
 };
 
 const initialState: MapState = {
   currentPosition: { lat: 0, lng: 0 },
   bounds: { ne: { lat: 0, lng: 0 }, sw: { lat: 0, lng: 0 } },
+  selectedRestaurant: undefined,
 };
 
 export const mapSlice = createSlice({
@@ -31,12 +33,16 @@ export const mapSlice = createSlice({
     setBounds: (state, action: PayloadAction<BoundsType>) => {
       state.bounds = action.payload;
     },
+    setSelectedRestaurant: (state, action: PayloadAction<number>) => {
+      state.selectedRestaurant = action.payload;
+    },
   },
 });
 
-export const { setCurrentPosition, setBounds } = mapSlice.actions;
+export const { setCurrentPosition, setBounds, setSelectedRestaurant } = mapSlice.actions;
 
 export const getCurrentPosition = (state: RootState) => state.map.currentPosition;
 export const getBounds = (state: RootState) => state.map.bounds;
+export const getSelectedRestaurant = (state: RootState) => state.map.selectedRestaurant;
 
 export default mapSlice.reducer;

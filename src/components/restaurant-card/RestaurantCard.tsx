@@ -10,10 +10,26 @@ import {
   Rating,
   Typography,
 } from '@mui/material';
+import { useRef } from 'react';
 
-const RestaurantCard = ({ restaurant }: { restaurant: RestaurantsDataType }) => {
+const RestaurantCard = ({
+  restaurant,
+  selected,
+}: {
+  restaurant: RestaurantsDataType;
+  selected: boolean;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  if (selected) ref?.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
   return (
-    <Card sx={{ p: 1 }} variant="outlined">
+    <Card
+      sx={[{ p: 1 }, selected && { border: '2px solid' }]}
+      variant="outlined"
+      key={restaurant.location_id}
+      ref={ref}
+    >
       <CardMedia
         sx={{
           width: '100%',
