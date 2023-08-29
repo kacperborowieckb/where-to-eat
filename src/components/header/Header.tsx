@@ -60,9 +60,6 @@ const Header = () => {
     apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
     onPlaceSelected: (place) => {
       if (place?.geometry?.location?.lat?.() && place?.geometry?.location?.lng?.()) {
-        console.log('dsds');
-        console.log(place);
-        console.log(place.geometry.location.lat());
         dispatch(
           setCurrentPosition({
             lat: place.geometry.location.lat(),

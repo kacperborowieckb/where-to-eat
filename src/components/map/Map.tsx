@@ -36,8 +36,6 @@ const Map = ({ mode, restaurants }: MapProps) => {
     }
   };
 
-  console.log(coordinates);
-
   return (
     <>
       {coordinates.lat !== 0 && coordinates.lng !== 0 ? (
