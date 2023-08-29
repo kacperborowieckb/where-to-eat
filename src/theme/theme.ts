@@ -4,9 +4,6 @@ export const theme = extendTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: `
-         html, body, #root {
-          height: 100%;
-        },
         #root {
           height: 100dvh;
           display: flex;

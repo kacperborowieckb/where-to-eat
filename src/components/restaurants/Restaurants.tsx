@@ -11,7 +11,7 @@ const Restaurants = ({ restaurants = [] }: RestaurantsProps) => {
   const selectedRestaurant = useAppSelector(getSelectedRestaurant);
 
   return (
-    <Grid item xs={4} sx={{ overflowY: 'scroll', maxHeight: '100%', my: 2, pr: 0 }}>
+    <Grid item xs={12} md={4} sx={{ overflowY: 'scroll', maxHeight: '100%', my: 2, pr: 0 }}>
       <Stack spacing={2} px={1} pb={3}>
         {restaurants.length > 0 ? (
           restaurants.map((restaurant) => (

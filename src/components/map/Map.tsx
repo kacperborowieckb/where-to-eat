@@ -36,6 +36,8 @@ const Map = ({ mode, restaurants }: MapProps) => {
     }
   };
 
+  console.log(coordinates);
+
   return (
     <>
       {coordinates.lat !== 0 && coordinates.lng !== 0 ? (
@@ -44,7 +46,11 @@ const Map = ({ mode, restaurants }: MapProps) => {
           center={coordinates}
           defaultZoom={16}
           zoom={mapZoom}
-          key={Number(coordinates.lat) + Number(coordinates.lng) + selectedRestaurant!}
+          key={
+            Number(coordinates.lat) +
+            Number(coordinates.lng) +
+            (selectedRestaurant ? selectedRestaurant : 1)
+          }
           options={{
             disableDefaultUI: true,
             mapId:
